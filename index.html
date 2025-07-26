@@ -172,6 +172,7 @@
     .popup-content { 
       padding: 1rem; 
       width: 80%;
+      max-height: 90vh;
       text-align: center; 
       color: var(--text); 
       background: var(--liquid-glass-bg); 
@@ -223,6 +224,28 @@
       font-size: 1.5rem; 
       cursor: pointer; 
       color: var(--text); 
+    }
+    .popup-content.shrink-popup h3 {
+      font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    }
+    .popup-content.shrink-popup p {
+      font-size: clamp(0.5rem, 1.4vw, 0.65rem);
+    }
+    .popup-content.shrink-popup h4 {
+      font-size: clamp(0.6rem, 1.4vw, 0.75rem);
+    }
+    .popup-content.shrink-popup ul {
+      font-size: clamp(0.45rem, 1.2vw, 0.6rem);
+    }
+    .popup-content.shrink-popup ul li {
+      margin-bottom: 0.15rem;
+    }
+    .popup-content.shrink-popup .popup-columns {
+      gap: 0.5rem;
+    }
+    .popup-content.shrink-popup .reserve-btn {
+      padding: 0.3rem 0.6rem;
+      font-size: clamp(0.45rem, 1.2vw, 0.6rem);
     }
     .reserve-btn { 
       background: var(--beige); 
@@ -445,7 +468,7 @@
       .popup-content p { font-size: clamp(0.55rem, 1.4vw, 0.7rem); }
       .popup-content h4 { font-size: clamp(0.65rem, 1.4vw, 0.8rem); }
       .popup-content ul { font-size: clamp(0.5rem, 1.2vw, 0.65rem); }
-      .popup-columns { grid-template-columns: 1fr; gap: 0.5rem; }
+      .popup-columns { grid-template-columns: 1fr 1fr; gap: 0.5rem; } /* Keep two columns */
       .reserve-btn { 
         padding: 0.3rem 0.6rem; 
         font-size: clamp(0.5rem, 1.2vw, 0.65rem); 
@@ -831,21 +854,38 @@
       ]
     }
   };
-
+  function adjustPopupSize() {
+      const popupContent = document.querySelector('.popup-content');
+      const popup = document.getElementById('popup');
+      if (popup.style.display === 'flex') {
+        const viewportHeight = window.innerHeight;
+        const maxHeight = viewportHeight * 0.9; // 90vh
+        const contentHeight = popupContent.getBoundingClientRect().height;
+        
+        if (contentHeight > maxHeight) {
+          popupContent.classList.add('shrink-popup');
+        } else {
+          popupContent.classList.remove('shrink-popup');
+        }
+      }
+    }
+  window.addEventListener('resize', adjustPopupSize);
   document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const svc = services[card.dataset.service];
-      document.getElementById('popup-title').textContent = svc.title;
-      document.getElementById('popup-description').textContent = svc.description;
-      const pricesEl = document.getElementById('popup-prices');
-      pricesEl.innerHTML = svc.prices.join('');
-      document.getElementById('popup').style.display = 'flex';
+      card.addEventListener('click', () => {
+        const svc = services[card.dataset.service];
+        document.getElementById('popup-title').textContent = svc.title;
+        document.getElementById('popup-description').textContent = svc.description;
+        const pricesEl = document.getElementById('popup-prices');
+        pricesEl.innerHTML = svc.prices.join('');
+        document.getElementById('popup').style.display = 'flex';
+        setTimeout(adjustPopupSize, 0); // Run after DOM update
+      });
     });
-  });
 
   function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-  }
+      document.getElementById('popup').style.display = 'none';
+      document.querySelector('.popup-content').classList.remove('shrink-popup');
+    }
 
   // Mouse-based parallax effect
   document.querySelectorAll('.liquid-glass').forEach(box => {
