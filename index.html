@@ -170,12 +170,10 @@
       z-index: 1000; 
     }
     .popup-content { 
-      padding: 1.5rem; 
-      width: 70%;
-      max-height: 90vh;
+      padding: 1rem; 
+      width: 80%;
       text-align: center; 
       color: var(--text); 
-      overflow-y: hidden; 
       background: var(--liquid-glass-bg); 
       position: relative; 
     }
@@ -191,31 +189,31 @@
       pointer-events: none;
     }
     .popup-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      margin-bottom: 0.8rem;
     }
     .popup-content p {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
+      margin-bottom: 0.8rem;
     }
     .popup-content h4 {
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
+      margin-top: 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: clamp(0.8rem, 2vw, 1rem);
     }
     .popup-content ul {
       list-style-type: none;
       text-align: left;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+      font-size: clamp(0.65rem, 1.8vw, 0.8rem);
     }
     .popup-content ul li {
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
     .popup-columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 1rem;
       text-align: left;
     }
     .popup-close { 
@@ -228,12 +226,12 @@
     }
     .reserve-btn { 
       background: var(--beige); 
-      padding: 0.8rem 1.5rem; 
+      padding: 0.6rem 1.2rem; 
       border-radius: 8px; 
-      margin-top: 1rem; 
+      margin-top: 0.8rem; 
       display: inline-block; 
       color: var(--text); 
-      font-size: 0.85rem; 
+      font-size: clamp(0.65rem, 1.8vw, 0.8rem); 
     }
     .marquee-wrapper {
       width: 100%;
@@ -359,8 +357,19 @@
       .testimonial p { font-size: 0.85rem; }
       .testimonial strong { font-size: 0.8rem; }
       .rating { font-size: 0.75rem; }
-      .popup-content { width: 90%; }
-      .popup-columns { grid-template-columns: 1fr; gap: 1rem; }
+      .popup-content { 
+        width: 90%; 
+        padding: 0.8rem; 
+      }
+      .popup-content h3 { font-size: clamp(0.9rem, 2.2vw, 1.2rem); }
+      .popup-content p { font-size: clamp(0.65rem, 1.8vw, 0.8rem); }
+      .popup-content h4 { font-size: clamp(0.75rem, 1.8vw, 0.9rem); }
+      .popup-content ul { font-size: clamp(0.6rem, 1.6vw, 0.75rem); }
+      .popup-columns { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .reserve-btn { 
+        padding: 0.5rem 1rem; 
+        font-size: clamp(0.6rem, 1.6vw, 0.75rem); 
+      }
       .popup-watermark { width: 300px; height: 300px; }
     }
     @media (max-width: 768px) {
@@ -391,13 +400,17 @@
       footer { padding: 1.5rem; }
       .popup-content { 
         width: 95%; 
-        padding: 1.2rem; 
+        padding: 0.7rem; 
       }
-      .popup-content h3 { font-size: 1.3rem; }
-      .popup-content p { font-size: 0.8rem; }
-      .popup-content h4 { font-size: 1rem; }
-      .popup-content ul { font-size: 0.75rem; }
-      .reserve-btn { font-size: 0.75rem; }
+      .popup-content h3 { font-size: clamp(0.8rem, 2vw, 1.1rem); }
+      .popup-content p { font-size: clamp(0.6rem, 1.6vw, 0.75rem); }
+      .popup-content h4 { font-size: clamp(0.7rem, 1.6vw, 0.85rem); }
+      .popup-content ul { font-size: clamp(0.55rem, 1.4vw, 0.7rem); }
+      .popup-columns { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .reserve-btn { 
+        padding: 0.4rem 0.8rem; 
+        font-size: clamp(0.55rem, 1.4vw, 0.7rem); 
+      }
       .popup-watermark { width: 250px; height: 250px; }
     }
     @media (max-width: 480px) {
@@ -426,13 +439,17 @@
       footer { padding: 1rem; }
       .popup-content { 
         width: 95%; 
-        padding: 1rem; 
+        padding: 0.6rem; 
       }
-      .popup-content h3 { font-size: 1.2rem; }
-      .popup-content p { font-size: 0.75rem; }
-      .popup-content h4 { font-size: 0.9rem; }
-      .popup-content ul { font-size: 0.7rem; }
-      .reserve-btn { font-size: 0.7rem; }
+      .popup-content h3 { font-size: clamp(0.75rem, 1.8vw, 1rem); }
+      .popup-content p { font-size: clamp(0.55rem, 1.4vw, 0.7rem); }
+      .popup-content h4 { font-size: clamp(0.65rem, 1.4vw, 0.8rem); }
+      .popup-content ul { font-size: clamp(0.5rem, 1.2vw, 0.65rem); }
+      .popup-columns { grid-template-columns: 1fr; gap: 0.5rem; }
+      .reserve-btn { 
+        padding: 0.3rem 0.6rem; 
+        font-size: clamp(0.5rem, 1.2vw, 0.65rem); 
+      }
       .popup-watermark { width: 200px; height: 200px; }
     }
   </style>
