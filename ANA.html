@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANA Beauty – Mayfair, London</title>
+  <link rel="icon" href="file:///C:/Users/No1/Desktop/B43A7F0.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;700&family=Coneria+Script&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f9f6f2;
+      --beige: #fcfbf4;
+      --text: #2b2b2b;
+      --liquid-glass-bg: rgba(245, 245, 220, 0.212);
+      --liquid-glass-border: rgba(255, 255, 255, 0.288);
+      --header-color: #d4a373;
+      --team-gap: 50px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      background: var(--cream); 
+      color: var(--text); 
+      line-height: 1.6; 
+      font-family: 'Lora', serif; 
+    }
+    a { color: inherit; text-decoration: none; }
+    .liquid-glass {
+      background: var(--liquid-glass-bg);
+      border: 1px solid var(--liquid-glass-border);
+      border-radius: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgb(255, 255, 255);
+      backdrop-filter: blur(3px);
+    }
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .liquid-glass > *:not(.popup-watermark) { 
+      position: relative; 
+      z-index: 1; 
+    }
+    h2, h3 {
+      color: var(--header-color);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 5px rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s;
+    }
+    h2 {
+      font-size: 3.75rem;
+      text-align: center;
+    }
+    h2:hover, h3:hover {
+      transform: translateY(-2px);
+    }
+    header { 
+      position: relative; 
+      background: url('file:///C:/Users/No1/Desktop/4c.jpg') center/cover; 
+      height: 100vh; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      text-align: center; 
+    }
+    header::before { 
+      content: ''; 
+      position: absolute; 
+      inset: 0; 
+      background: rgba(0,0,0,0.4); 
+    }
+    .header-content { 
+      padding: 2rem; 
+      width: clamp(280px, 40%, 600px); 
+      height: auto; 
+      color: #fff; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      z-index: 2; 
+    }
+    .logo { 
+      width: 300px; 
+      height: auto; 
+      margin-bottom: 1rem; 
+    }
+    header h1 { 
+      font-family: 'Coneria Script', cursive; 
+      font-size: 3.5rem; 
+      color: #fff; 
+    }
+    header p { 
+      margin: 1rem 0; 
+      font-weight: bold; 
+      font-size: 2rem; 
+      color: #fff; 
+    }
+    .cta-container { 
+      display: flex; 
+      gap: 1rem; 
+    }
+    .cta { 
+      padding: 1rem 2rem; 
+      font-family: 'Lora', serif; 
+      color: #fff; 
+    }
+    .content-wrapper { 
+      background: url('file:///C:/Users/No1/Desktop/Palmero.webp') center/cover fixed; 
+      position: relative; 
+    }
+    .content-wrapper::before { 
+      content: ''; 
+      position: absolute; 
+      inset: 0; 
+      background: rgba(0,0,0,0.1); 
+      z-index: -1; 
+    }
+    section { 
+      padding: 4rem 2rem; 
+      max-width: 1200px; 
+      margin: auto; 
+    }
+    .services { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 50px; 
+      justify-items: center; 
+    }
+    .services-row-2 { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 0px; 
+      justify-items: center; 
+      margin-top: 50px;
+    }
+    .service-card { 
+      padding: 2rem 1rem; 
+      text-align: center; 
+      cursor: pointer; 
+      transition: transform 0.3s; 
+      width: 100%; 
+      max-width: 250px; 
+      aspect-ratio: 1/1; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+    }
+    .service-card:hover { 
+      transform: translateY(-5px); 
+    }
+    .icon { 
+      width: 60px; 
+      height: 60px; 
+      margin-bottom: 1rem; 
+    }
+    .popup { 
+      position: fixed; 
+      inset: 0; 
+      background: rgba(0,0,0,0.6); 
+      display: none; 
+      justify-content: center; 
+      align-items: center; 
+      z-index: 1000; 
+    }
+    .popup-content { 
+      padding: 1.5rem; 
+      width: 70%;
+      max-height: 90vh;
+      text-align: center; 
+      color: var(--text); 
+      overflow-y: hidden; 
+      background: var(--liquid-glass-bg); 
+      position: relative; 
+    }
+    .popup-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      opacity: 0.3;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .popup-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .popup-content p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .popup-content h4 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .popup-content ul {
+      list-style-type: none;
+      text-align: left;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+    .popup-content ul li {
+      margin-bottom: 0.3rem;
+    }
+    .popup-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      text-align: left;
+    }
+    .popup-close { 
+      position: absolute; 
+      top: 1rem; 
+      right: 1rem; 
+      font-size: 1.5rem; 
+      cursor: pointer; 
+      color: var(--text); 
+    }
+    .reserve-btn { 
+      background: var(--beige); 
+      padding: 0.8rem 1.5rem; 
+      border-radius: 8px; 
+      margin-top: 1rem; 
+      display: inline-block; 
+      color: var(--text); 
+      font-size: 0.85rem; 
+    }
+    .marquee-wrapper {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      padding: 20px 0;
+      position: relative;
+    }
+    .marquee-content {
+      display: inline-flex;
+      animation: scroll-left 30s linear infinite;
+      gap: 50px;
+    }
+    .testimonial {
+      width: 300px;
+      height: 300px;
+      padding: 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text);
+      flex-shrink: 0;
+      white-space: normal;
+    }
+    .testimonial p {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      flex-grow: 1;
+    }
+    .testimonial strong {
+      font-size: 0.85rem;
+    }
+    .rating {
+      color: #ffd700;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ana-container {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem;
+      color: var(--text);
+      width: 100%;
+      max-width: 1200px;
+      margin: var(--team-gap) auto 0;
+    }
+    .ana-image {
+      flex: 1;
+      text-align: center;
+    }
+    .ana-image img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+    .ana-credentials {
+      flex: 1;
+      text-align: justify;
+      font-family: 'Lora', serif;
+    }
+    footer {
+      background: var(--beige);
+      padding: 2rem;
+      text-align: center;
+      position: sticky;
+      bottom: 0;
+      color: var(--text);
+    }
+    footer a {
+      margin: 0 0.5rem;
+    }
+    .about-container {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.5rem;
+      color: var(--text);
+    }
+    .about-text {
+      flex: 1;
+      text-align: justify;
+      font-weight: bold;
+    }
+    .about-map {
+      flex: 1;
+      height: 300px;
+    }
+    @media (max-width: 1024px) {
+      .header-content { width: clamp(280px, 50%, 500px); }
+      .logo { width: 250px; }
+      header h1 { font-size: 3rem; }
+      header p { font-size: 1.8rem; }
+      h2 { font-size: 3rem; }
+      .services { grid-template-columns: repeat(2, 1fr); }
+      .services-row-2 { grid-template-columns: 1fr; }
+      .ana-container { flex-direction: column; padding: 1rem; }
+      .about-container { padding: 1rem; }
+      .testimonial { font-size: 0.85rem; width: 250px; height: 250px; }
+      .testimonial p { font-size: 0.85rem; }
+      .testimonial strong { font-size: 0.8rem; }
+      .rating { font-size: 0.75rem; }
+      .popup-content { width: 90%; }
+      .popup-columns { grid-template-columns: 1fr; gap: 1rem; }
+      .popup-watermark { width: 300px; height: 300px; }
+    }
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1.5rem; }
+      .header-content { width: 80%; padding: 1.5rem; }
+      .logo { width: 200px; }
+      .cta-container { flex-direction: column; }
+      .services, .services-row-2 {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 50px;
+      }
+      .services-row-2 { gap: 50px; }
+      .service-card { max-width: 250px; }
+      .ana-container { flex-direction: column; }
+      .about-container { flex-direction: column; padding: 1rem; }
+      .testimonial { font-size: 0.8rem; width: 200px; height: 200px; padding: 1rem; }
+      .testimonial p { font-size: 0.8rem; }
+      .testimonial strong { font-size: 0.75rem; }
+      .rating { font-size: 0.7rem; }
+      .liquid-glass { padding: 1.2rem; }
+      h2 { font-size: 2.4rem; }
+      .popup-content { 
+        width: 95%; 
+        padding: 1.2rem; 
+      }
+      .popup-content h3 { font-size: 1.3rem; }
+      .popup-content p { font-size: 0.8rem; }
+      .popup-content h4 { font-size: 1rem; }
+      .popup-content ul { font-size: 0.75rem; }
+      .reserve-btn { font-size: 0.75rem; }
+      .popup-watermark { width: 250px; height: 250px; }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.5rem; }
+      header p { font-size: 1.2rem; }
+      .logo { width: 150px; }
+      .cta { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+      section { padding: 2rem 1rem; }
+      h2 { font-size: 2rem; }
+      .about-container { padding: 0.8rem; }
+      .testimonial { font-size: 0.75rem; width: 180px; height: 180px; padding: 0.8rem; }
+      .testimonial p { font-size: 0.75rem; }
+      .testimonial strong { font-size: 0.7rem; }
+      .rating { font-size: 0.65rem; }
+      .popup-content { 
+        width: 95%; 
+        padding: 1rem; 
+      }
+      .popup-content h3 { font-size: 1.2rem; }
+      .popup-content p { font-size: 0.75rem; }
+      .popup-content h4 { font-size: 0.9rem; }
+      .popup-content ul { font-size: 0.7rem; }
+      .reserve-btn { font-size: 0.7rem; }
+      .popup-watermark { width: 200px; height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-content liquid-glass">
+    <img class="logo" src="file:///C:/Users/No1/Desktop/B43A7F0.png" alt="ANA Beauty Logo"/>
+    <h1>ANA Beauty</h1>
+    <p>you deserve more...</p>
+    <div class="cta-container">
+      <a href="tel:+447438695668" class="cta liquid-glass">📞 Book Now</a>
+      <a href="https://treatwellapp.page.link/XvgSV" class="cta liquid-glass">📅 Online Appointment</a>
+    </div>
+  </div>
+</header>
+
+<div class="content-wrapper">
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service-card liquid-glass" data-service="laser">
+        <img class="icon" src="https://img.icons8.com/ios-filled/100/ffffff/laser-beam.png"/>
+        <h3>Laser Hair Removal</h3>
+      </div>
+      <div class="service-card liquid-glass" data-service="waxing">
+        <img class="icon" src="https://img.icons8.com/ios-filled/100/ffffff/hair-removal.png"/>
+        <h3>Waxing</h3>
+      </div>
+      <div class="service-card liquid-glass" data-service="massage">
+        <img class="icon" src="https://img.icons8.com/ios-filled/100/ffffff/spa.png"/>
+        <h3>Massage</h3>
+      </div>
+    </div>
+    <div class="services-row-2">
+      <div class="service-card liquid-glass" data-service="manicure">
+        <img class="icon" src="https://img.icons8.com/ios-filled/100/ffffff/manicure.png"/>
+        <h3>Manicure & Pedicure</h3>
+      </div>
+      <div class="service-card liquid-glass" data-service="facials">
+        <img class="icon" src="https://img.icons8.com/ios-filled/100/ffffff/facial-mask.png"/>
+        <h3>Facials</h3>
+      </div>
+    </div>
+  </section>
+
+  <div class="popup" id="popup">
+    <div class="popup-content liquid-glass">
+      <img class="popup-watermark" src="file:///C:/Users/No1/Desktop/B43A7F0.png" alt="Watermark"/>
+      <span class="popup-close" onclick="closePopup()">×</span>
+      <h3 id="popup-title"></h3>
+      <p id="popup-description"></p>
+      <h4>Prices:</h4>
+      <div id="popup-prices"></div>
+      <a href="https://treatwellapp.page.link/XvgSV" class="reserve-btn">Reserve Now</a>
+    </div>
+  </div>
+
+  <section id="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="marquee-wrapper">
+      <div class="marquee-content">
+        <!-- Set 1 -->
+        <div class="testimonial liquid-glass"><p>"Ana Laser is fantastic! The clinic is spotless, and Ana is super professional. I’ve had several sessions and the results are amazing. Highly recommend for anyone considering laser hair removal."</p><strong>– Sarah W.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Great experience at this laser studio. Ana is very kind and explains everything clearly. The treatments are fast, comfortable, and effective. The place is also very clean and welcoming."</p><strong>– Emily T.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"One of the best laser clinics I’ve ever visited. Very clean space, advanced equipment, and a caring professional. I’ve noticed great results after just a few sessions!"</p><strong>– Olivia P.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Super happy with the service at Ana Laser. The process is almost painless and I’m seeing fantastic results. Ana is attentive and makes you feel comfortable every step of the way."</p><strong>– Chloe R.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Highly professional and clean environment. Ana is very friendly and really knows what she’s doing. I saw a visible reduction in hair quickly. Definitely 5-star service."</p><strong>– Sophie M.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Excellent service and visible results! The studio is clean and modern. Ana is gentle, detail-oriented, and always makes sure you’re comfortable. I’m very satisfied with my progress."</p><strong>– Amelia B.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"I had a great laser experience here. The treatments were quick and surprisingly pain-free. Ana is professional and the results speak for themselves. Definitely recommend!"</p><strong>– Grace H.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"I’m really impressed by the quality of service. Ana takes her time, answers all questions, and delivers amazing results. Super clean and relaxing atmosphere too!"</p><strong>– Lily C.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Perfect choice for laser hair removal! Clean studio, professional approach, and fast results. Ana is both skilled and kind. Highly recommend!"</p><strong>– Hannah D.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Ana Laser is amazing! Smooth booking process, clean environment, and great outcomes after just a few sessions. Ana is always welcoming and professional."</p><strong>– Emma S.</strong><div class="rating">★★★★</div></div>
+        <!-- Set 2 for infinite loop -->
+        <div class="testimonial liquid-glass"><p>"Ana Laser is fantastic! The clinic is spotless, and Ana is super professional. I’ve had several sessions and the results are amazing. Highly recommend for anyone considering laser hair removal."</p><strong>– Sarah W.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Great experience at this laser studio. Ana is very kind and explains everything clearly. The treatments are fast, comfortable, and effective. The place is also very clean and welcoming."</p><strong>– Emily T.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"One of the best laser clinics I’ve ever visited. Very clean space, advanced equipment, and a caring professional. I’ve noticed great results after just a few sessions!"</p><strong>– Olivia P.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Super happy with the service at Ana Laser. The process is almost painless and I’m seeing fantastic results. Ana is attentive and makes you feel comfortable every step of the way."</p><strong>– Chloe R.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Highly professional and clean environment. Ana is very friendly and really knows what she’s doing. I saw a visible reduction in hair quickly. Definitely 5-star service."</p><strong>– Sophie M.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Excellent service and visible results! The studio is clean and modern. Ana is gentle, detail-oriented, and always makes sure you’re comfortable. I’m very satisfied with my progress."</p><strong>– Amelia B.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"I had a great laser experience here. The treatments were quick and surprisingly pain-free. Ana is professional and the results speak for themselves. Definitely recommend!"</p><strong>– Grace H.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"I’m really impressed by the quality of service. Ana takes her time, answers all questions, and delivers amazing results. Super clean and relaxing atmosphere too!"</p><strong>– Lily C.</strong><div class="rating">★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Perfect choice for laser hair removal! Clean studio, professional approach, and fast results. Ana is both skilled and kind. Highly recommend!"</p><strong>– Hannah D.</strong><div class="rating">★★★★★</div></div>
+        <div class="testimonial liquid-glass"><p>"Ana Laser is amazing! Smooth booking process, clean environment, and great outcomes after just a few sessions. Ana is always welcoming and professional."</p><strong>– Emma S.</strong><div class="rating">★★★★</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="about-container liquid-glass">
+      <div class="about-text">
+        <p>At ANA Beauty, we bring a legacy of excellence from our renowned branches in Dubai and Istanbul to the heart of London. Our team is dedicated to delivering unparalleled beauty and wellness experiences, blending cutting-edge techniques with personalized care to ensure every client leaves feeling radiant and rejuvenated.</p>
+      </div>
+      <iframe class="about-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d620.7158528145765!2d-0.15378061078766636!3d51.515721832815146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605000b476363%3A0x463d6aa44a7e6862!2sAna%20Clinic%20London!5e0!3m2!1sfa!2s!4v1753454213036!5m2!1sfa!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Commented out original team section for potential reuse -->
+  <!--
+  <section id="team">
+    <h2>Our Team</h2>
+    <div class="team">
+      <div class="team-member liquid-glass">
+        <img src="https://source.unsplash.com/200x200/?woman,portrait,1" alt="Ana"/>
+        <h4>ANA</h4>
+        <p>Management</p>
+      </div>
+      <div class="team-member liquid-glass">
+        <img src="https://source.unsplash.com/200x200/?woman,portrait,2" alt="Ann"/>
+        <h4>Ann</h4>
+        <p>Laser & Waxing Technician</p>
+      </div>
+      <div class="team-member liquid-glass">
+        <img src="https://source.unsplash.com/200x200/?woman,portrait,3" alt="Rose"/>
+        <h4>Rose</h4>
+        <p>Massage Therapist</p>
+      </div>
+      <div class="team-member liquid-glass">
+        <img src="https://source.unsplash.com/200x200/?woman,portrait,4" alt="Jane"/>
+        <h4>Jane</h4>
+        <p>Facial & Nail Care Specialist</p>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section id="team">
+    <div class="ana-container liquid-glass">
+      <div class="ana-image">
+        <img src="https://source.unsplash.com/300x400/?woman,portrait,professional" alt="Ana"/>
+        <p>International Certifications: CIDESCO, ITEC, CIBTAC</p>
+      </div>
+      <div class="ana-credentials">
+        <h3>Ana – Founder & Lead Specialist</h3>
+        <p>With over 15 years of experience in the beauty industry, Ana brings a wealth of expertise from her acclaimed clinics in Dubai and Istanbul. Trained in advanced laser technologies, skin rejuvenation, and holistic wellness, she holds prestigious international certifications including CIDESCO, ITEC, and CIBTAC. Ana’s commitment to excellence ensures every client receives personalized, world-class care.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>ANA Beauty © 2024</p>
+    <p>📍 3 Portman Square, London W1H 6LB | 📞 +44 74 3869 5668</p>
+    <p>
+      <a href="https://www.instagram.com/ana_london_clinic" target="_blank">Follow us on Instagram</a> • 
+      <a href="https://wa.me/+447438695668" target="_blank">WhatsApp</a> • 
+      <a href="https://maps.app.goo.gl/gkNE5Toh82Hx1a4M9" target="_blank">Google Maps</a>
+    </p>
+  </footer>
+</div>
+
+<script>
+  const services = {
+    laser: {
+      img: 'https://source.unsplash.com/800x400/?laser,beauty',
+      title: 'Laser Hair Removal',
+      description: 'Advanced laser treatments for permanent hair reduction.',
+      prices: [
+        '<div class="popup-columns">',
+        '<div>',
+        '<h4>Face</h4>',
+        '<ul>',
+        '<li>Chin – 25 min – £10</li>',
+        '<li>Nose – 20 min – £10</li>',
+        '<li>Upper Lip – 25 min – £20</li>',
+        '<li>Lip & Chin – 25 min – £25</li>',
+        '<li>Neck – 25 min – £30</li>',
+        '<li>Sides of Face – 25 min – £30</li>',
+        '<li>Full Face – 25 min – £40</li>',
+        '</ul>',
+        '<h4>Ladies’ Body</h4>',
+        '<ul>',
+        '<li>Chest – 1 h – £15</li>',
+        '<li>Underarm – 1 h – £15</li>',
+        '<li>Brazilian – 1 h – £25</li>',
+        '<li>Bikini – 1 h – £30</li>',
+        '<li>Hollywood – 1 h – £30</li>',
+        '<li>High Bikini – 1 h – £40</li>',
+        '<li>Half Arm – 1 h – £45</li>',
+        '<li>Half Leg – 1 h – £55</li>',
+        '<li>Full Arm – 1 h – £60</li>',
+        '<li>Full Leg – 1 h – £80</li>',
+        '<li>Full Body – 1 h 30 min – £140</li>',
+        '</ul>',
+        '</div>',
+        '<div>',
+        '<h4>Men’s Face</h4>',
+        '<ul>',
+        '<li>Nose – 20 min – £20</li>',
+        '<li>Full Face – 35 min – £30</li>',
+        '<li>Neck – 35 min – £30</li>',
+        '<li>Full Beard & Neck – 35 min – £45</li>',
+        '</ul>',
+        '<h4>Men’s Body</h4>',
+        '<ul>',
+        '<li>Underarm – 1 h – £15</li>',
+        '<li>Neck – 1 h – £30</li>',
+        '<li>Chest – 1 h – £40</li>',
+        '<li>Shoulders – 1 h – £40</li>',
+        '<li>Full Arm – 1 h – £60</li>',
+        '<li>Full Back – 1 h – £60</li>',
+        '<li>Half Leg – 1 h – £60</li>',
+        '<li>Back & Shoulders – 1 h – £70</li>',
+        '<li>Lower Back – 1 h – £70</li>',
+        '<li>Brazilian – 1 h – £100</li>',
+        '<li>Full Leg – 1 h – £100</li>',
+        '<li>Hollywood – 1 h – £100</li>',
+        '</ul>',
+        '</div>',
+        '</div>'
+      ]
+    },
+    waxing: {
+      img: 'https://source.unsplash.com/800x400/?waxing-massage',
+      title: 'Waxing',
+      description: 'Professional waxing services for smooth & flawless skin.',
+      prices: [
+        '<div class="popup-columns">',
+        '<div>',
+        '<h4>Ladies’ Waxing</h4>',
+        '<ul>',
+        '<li>Hollywood – £30</li>',
+        '<li>Brazilian – £40</li>',
+        '<li>Hollywood (Hot Wax) – £40</li>',
+        '<li>Half Leg – £25</li>',
+        '<li>Full Leg – £40</li>',
+        '<li>Underarm – £12</li>',
+        '<li>Half Arm – £20</li>',
+        '<li>Full Arm – £25</li>',
+        '</ul>',
+        '<h4>Ladies’ Waxing – Face</h4>',
+        '<ul>',
+        '<li>Eyebrows – £7</li>',
+        '<li>Lower Lip – £5</li>',
+        '<li>Chin – £8</li>',
+        '<li>Upper Lip – £11</li>',
+        '<li>Full Face – £30</li>',
+        '</ul>',
+        '</div>',
+        '<div>',
+        '<h4>Ladies’ Waxing – Upper Body</h4>',
+        '<ul>',
+        '<li>Chest – £20</li>',
+        '<li>Back – £25</li>',
+        '</ul>',
+        '<h4>Ladies’ Waxing – Full Body</h4>',
+        '<ul>',
+        '<li>Full Body – £120</li>',
+        '<li>Buttocks – £15</li>',
+        '</ul>',
+        '<h4>Men’s Waxing</h4>',
+        '<ul>',
+        '<li>Back & Shoulders – £70</li>',
+        '<li>Abdomen – £35</li>',
+        '<li>Back – £40</li>',
+        '<li>Shoulders – £30</li>',
+        '<li>Chest – £35</li>',
+        '<li>Leg – £46</li>',
+        '</ul>',
+        '</div>',
+        '</div>'
+      ]
+    },
+    massage: {
+      img: 'https://source.unsplash.com/800x400/?massage,spa',
+      title: 'Massage',
+      description: 'Relaxing massages to rejuvenate body & mind.',
+      prices: [
+        '<div class="popup-columns">',
+        '<div>',
+        '<h4>Deep Tissue Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £60</li>',
+        '<li>1 hour – £100</li>',
+        '<li>1 hour 30 minutes – £120</li>',
+        '</ul>',
+        '<h4>Swedish Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £60</li>',
+        '<li>1 hour – £99</li>',
+        '</ul>',
+        '<h4>Back, Neck & Shoulders Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £40</li>',
+        '<li>1 hour – £70</li>',
+        '</ul>',
+        '<h4>Back Massage</h4>',
+        '<ul>',
+        '<li>1 hour – £60</li>',
+        '</ul>',
+        '<h4>Relaxing Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £60</li>',
+        '<li>1 hour – £100</li>',
+        '</ul>',
+        '<h4>Face Massage</h4>',
+        '<ul>',
+        '<li>15 minutes – £20</li>',
+        '<li>30 minutes – £40</li>',
+        '</ul>',
+        '</div>',
+        '<div>',
+        '<h4>Indian Head Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £40</li>',
+        '<li>1 hour – £70</li>',
+        '</ul>',
+        '<h4>Head Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £50</li>',
+        '<li>1 hour – £70</li>',
+        '</ul>',
+        '<h4>Full Body Massage</h4>',
+        '<ul>',
+        '<li>30 minutes – £60</li>',
+        '<li>1 hour – £120</li>',
+        '</ul>',
+        '<h4>Foot Massage</h4>',
+        '<ul>',
+        '<li>15 minutes – £20</li>',
+        '<li>30 minutes – £40</li>',
+        '</ul>',
+        '<h4>Hand Massage</h4>',
+        '<ul>',
+        '<li>15 minutes – £15</li>',
+        '<li>30 minutes – £30</li>',
+        '</ul>',
+        '<h4>Foot & Leg Massage</h4>',
+        '<ul>',
+        '<li>15 minutes – £20</li>',
+        '<li>30 minutes – £40</li>',
+        '</ul>',
+        '</div>',
+        '</div>'
+      ]
+    },
+    manicure: {
+      img: 'https://source.unsplash.com/800x400/?manicure,pedicure',
+      title: 'Manicure & Pedicure',
+      description: 'Luxury nail care and polish service.',
+      prices: [
+        '<h4>Manicure & Pedicure</h4>',
+        '<ul>',
+        '<li>Manicure – £30</li>',
+        '<li>Pedicure – £35</li>',
+        '<li>Gel Polish – £20</li>',
+        '</ul>',
+        '<h4>Eyebrows & Eyelashes</h4>',
+        '<ul>',
+        '<li>Eyebrow Tint – 10 min – £7</li>',
+        '<li>Eyelash Tint – 15 min – £10</li>',
+        '<li>Eyebrow Threading – 10 min – £7</li>',
+        '<li>Eyebrow Waxing – 10 min – £7</li>',
+        '<li>Eyebrow Shape – 10 min – £10</li>',
+        '<li>Eyelash Perm & Tint – 45 min – £15</li>',
+        '<li>Eyebrow Wax & Tint – 30 min – £12</li>',
+        '<li>Eyebrow Shape & Tint – 30 min – £12</li>',
+        '<li>Eyebrow Thread & Tint – 30 min – £12</li>',
+        '<li>Eyebrow & Eyelash Tinting – 20 min – £17 / £30</li>',
+        '<li>Lash Lift – 45 min – £70</li>',
+        '<li>Lash Lift & Tint – 1 hour – £80</li>',
+        '<li>Definition Brows – 1 hour – £25</li>',
+        '<li>Eye Trio (Eyebrow & Eyelash Tint with Eyebrow Shape) – 45 min – £20</li>',
+        '</ul>'
+      ]
+    },
+    facials: {
+      img: 'https://source.unsplash.com/800x400/?facial,spa',
+      title: 'Facials',
+      description: 'Deluxe facial treatments customized to your skin.',
+      prices: [
+        '<ul>',
+        '<li>Classic Facial – 1 hour – £90</li>',
+        '<li>LED Light Therapy Facial – 1 hour – £120</li>',
+        '<li>Micro-Needling Facial – 1 hour – £150</li>',
+        '<li>Deep Cleansing Facial – 1 hour – £90</li>',
+        '<li>Luxury Facial – 1 hour – £200</li>',
+        '<li>Express Facial – 30 minutes – £50</li>',
+        '</ul>'
+      ]
+    }
+  };
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const svc = services[card.dataset.service];
+      document.getElementById('popup-title').textContent = svc.title;
+      document.getElementById('popup-description').textContent = svc.description;
+      const pricesEl = document.getElementById('popup-prices');
+      pricesEl.innerHTML = svc.prices.join('');
+      document.getElementById('popup').style.display = 'flex';
+    });
+  });
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  // Mouse-based parallax effect
+  document.querySelectorAll('.liquid-glass').forEach(box => {
+    box.addEventListener('mousemove', (e) => {
+      const rect = box.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const moveX = (x - centerX) / centerX * 10;
+      const moveY = (y - centerY) / centerY * 10;
+      box.style.setProperty('--light-x', `${moveX}px`);
+      box.style.setProperty('--light-y', `${moveY}px`);
+      box.querySelector('::before').style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.25), transparent 60%)`;
+    });
+    box.addEventListener('mouseleave', () => {
+      box.querySelector('::before').style.background = `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), transparent 60%)`;
+    });
+  });
+</script>
+
+</body>
+</html>
