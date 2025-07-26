@@ -130,29 +130,27 @@
     }
     .services { 
       display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 50px; 
+      grid-template-columns: repeat(5, 1fr); 
+      gap: 20px; 
       justify-items: center; 
-    }
-    .services-row-2 { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 0px; 
-      justify-items: center; 
-      margin-top: 50px;
+      max-width: 90%; 
+      margin: auto;
     }
     .service-card { 
-      padding: 2rem 1rem; 
+      padding: 1.5rem 0.5rem; 
       text-align: center; 
       cursor: pointer; 
       transition: transform 0.3s; 
       width: 100%; 
-      max-width: 250px; 
+      max-width: 180px; 
       aspect-ratio: 1/1; 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
       align-items: center; 
+    }
+    .service-card h3 {
+      font-size: 1rem;
     }
     .service-card:hover { 
       transform: translateY(-5px); 
@@ -160,7 +158,7 @@
     .icon { 
       width: 60px; 
       height: 60px; 
-      margin-bottom: 1rem; 
+      margin-bottom: 0.5rem; 
     }
     .popup { 
       position: fixed; 
@@ -313,6 +311,12 @@
       bottom: 0;
       color: var(--text);
     }
+    footer p {
+      white-space: nowrap;
+      font-size: clamp(0.6rem, 2vw, 0.8rem);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     footer a {
       margin: 0 0.5rem;
     }
@@ -338,8 +342,17 @@
       header h1 { font-size: 3rem; }
       header p { font-size: 1.8rem; }
       h2 { font-size: 3rem; }
-      .services { grid-template-columns: repeat(2, 1fr); }
-      .services-row-2 { grid-template-columns: 1fr; }
+      .services { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 15px; 
+        max-width: 80%; 
+      }
+      .service-card { 
+        max-width: 120px; 
+        padding: 1rem 0.3rem; 
+      }
+      .service-card h3 { font-size: 0.9rem; }
+      .icon { width: 35px; height: 35px; }
       .ana-container { flex-direction: column; padding: 1rem; }
       .about-container { padding: 1rem; }
       .testimonial { font-size: 0.85rem; width: 250px; height: 250px; }
@@ -356,13 +369,17 @@
       .header-content { width: 80%; padding: 1.5rem; }
       .logo { width: 200px; }
       .cta-container { flex-direction: column; }
-      .services, .services-row-2 {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        gap: 50px;
+      .services { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px; 
+        max-width: 80%; 
       }
-      .services-row-2 { gap: 50px; }
-      .service-card { max-width: 250px; }
+      .service-card { 
+        max-width: 100px; 
+        padding: 0.8rem 0.2rem; 
+      }
+      .service-card h3 { font-size: 0.8rem; }
+      .icon { width: 30px; height: 30px; }
       .ana-container { flex-direction: column; }
       .about-container { flex-direction: column; padding: 1rem; }
       .testimonial { font-size: 0.8rem; width: 200px; height: 200px; padding: 1rem; }
@@ -371,6 +388,7 @@
       .rating { font-size: 0.7rem; }
       .liquid-glass { padding: 1.2rem; }
       h2 { font-size: 2.4rem; }
+      footer { padding: 1.5rem; }
       .popup-content { 
         width: 95%; 
         padding: 1.2rem; 
@@ -390,10 +408,22 @@
       section { padding: 2rem 1rem; }
       h2 { font-size: 2rem; }
       .about-container { padding: 0.8rem; }
+      .services { 
+        grid-template-columns: 1fr; 
+        gap: 10px; 
+        max-width: 80%; 
+      }
+      .service-card { 
+        max-width: 120px; 
+        padding: 0.8rem 0.2rem; 
+      }
+      .service-card h3 { font-size: 0.75rem; }
+      .icon { width: 25px; height: 25px; }
       .testimonial { font-size: 0.75rem; width: 180px; height: 180px; padding: 0.8rem; }
       .testimonial p { font-size: 0.75rem; }
       .testimonial strong { font-size: 0.7rem; }
       .rating { font-size: 0.65rem; }
+      footer { padding: 1rem; }
       .popup-content { 
         width: 95%; 
         padding: 1rem; 
@@ -437,8 +467,6 @@
         <img class="icon" src="Massage.png"/>
         <h3>Massage</h3>
       </div>
-    </div>
-    <div class="services-row-2">
       <div class="service-card liquid-glass" data-service="manicure">
         <img class="icon" src="Manicure.png"/>
         <h3>Manicure & Pedicure</h3>
