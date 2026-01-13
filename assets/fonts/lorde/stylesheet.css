@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Lorde';
+    src: url('Lorde.woff2') format('woff2'),
+        url('Lorde.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
