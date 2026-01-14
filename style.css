@@ -1042,7 +1042,7 @@ menu-link.active {
 
     & .splide__slide,
     & .splide__list {
-        height: fit-content;
+        height: 880px !important;
     }
 }
 
@@ -1055,7 +1055,7 @@ li.PriceBox--row {
     display: grid;
     grid-template-columns: 2fr 7fr 2fr;
     align-items: center;
-    border-bottom: 1px solid currentColor;
+    border-bottom: 1px dashed currentColor;
 
     & svg {
         width: 30px;
@@ -1065,11 +1065,16 @@ li.PriceBox--row {
 
 .Price--row--header {
     grid-template-columns: 1fr !important;
-    font-size: 20px;
-    padding-bottom: 19px;
-    font-weight: bold;
+    font-size: 15px;
+    padding-bottom: 15px;
+    font-weight: 700;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid currentColor !important;
+}
+
+.padded-header {
+    padding-top: 15px;
 }
 
 
